@@ -86,6 +86,8 @@ public class Square {
 		// Specifies the location and data format of an array of vertex
 
 		// coordinates to use when rendering.
+		
+		gl.glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
 
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
 
