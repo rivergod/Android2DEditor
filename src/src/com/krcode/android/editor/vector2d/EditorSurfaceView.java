@@ -19,6 +19,7 @@ public class EditorSurfaceView extends GLSurfaceView {
 	public EditorSurfaceView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
+		this.setRenderer(new EditorRender());
 	}
 
 	/**
@@ -28,6 +29,7 @@ public class EditorSurfaceView extends GLSurfaceView {
 	public EditorSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
+		this.setRenderer(new EditorRender());
 	}
 
 }
