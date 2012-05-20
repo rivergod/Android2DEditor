@@ -42,4 +42,17 @@ public class FloatVertex {
 		this.z = z;
 	}
 
+	public static FloatVertex rotateZ(FloatVertex input, float degree) {
+		FloatVertex out = new FloatVertex();
+
+		float radian = degree / 180.0f * (float) Math.PI;
+
+		out.setX((float)((input.getX() * Math.cos(radian))
+				- (input.getY() * Math.sin(radian))));
+		
+		out.setY((float)((input.getX() * Math.sin(radian))
+				+ (input.getY() * Math.cos(radian))));
+		
+		return out;
+	}
 }
