@@ -10,10 +10,9 @@ import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Square implements Figure{
+public class Quadrangle implements Figure {
 
-	private float vertices[] = {
-			-1.0f, 1.0f, 0.0f, // 0, Top Left
+	private float vertices[] = { -1.0f, 1.0f, 0.0f, // 0, Top Left
 			-1.0f, -1.0f, 0.0f, // 1, Bottom Left
 			1.0f, -1.0f, 0.0f, // 2, Bottom Right
 			1.0f, 1.0f, 0.0f, // 3, Top Right
@@ -31,7 +30,7 @@ public class Square implements Figure{
 
 	private ShortBuffer indexBuffer;
 
-	public Square() {
+	public Quadrangle() {
 
 		// a float is 4 bytes, therefore we multiply the number if
 
@@ -86,12 +85,13 @@ public class Square implements Figure{
 		// Specifies the location and data format of an array of vertex
 
 		// coordinates to use when rendering.
-		
+
 		gl.glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
 
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
 
-		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length, GL10.GL_UNSIGNED_SHORT, indexBuffer);
+		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length,
+				GL10.GL_UNSIGNED_SHORT, indexBuffer);
 
 		// Disable the vertices buffer.
 
