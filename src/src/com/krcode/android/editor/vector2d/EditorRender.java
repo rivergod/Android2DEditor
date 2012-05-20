@@ -6,6 +6,8 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 
+import com.krcode.android.editor.vector2d.element.Square;
+
 public class EditorRender implements Renderer {
 
 	private Square square;
