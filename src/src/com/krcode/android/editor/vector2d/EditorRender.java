@@ -8,6 +8,7 @@ import android.opengl.GLU;
 
 import com.krcode.android.editor.vector2d.element.Figure;
 import com.krcode.android.editor.vector2d.element.Quadrangle;
+import com.krcode.android.editor.vector2d.element.Triangle;
 
 public class EditorRender implements Renderer {
 
@@ -16,7 +17,7 @@ public class EditorRender implements Renderer {
 
 	public EditorRender() {
 		// TODO Auto-generated constructor stub
-		figure = new Quadrangle();
+		figure = new Triangle();
 	}
 
 	@Override
@@ -53,63 +54,63 @@ public class EditorRender implements Renderer {
 
 		gl.glPopMatrix(); // 이동(z축 -10)변환된 행렬 사용
 
-		// SQUARE B
-
-		// Save the current matrix
-
-		gl.glPushMatrix(); // 이동(z축 -10)변환된 행렬 저장
-
-		// Rotate square B before moving it, making it rotate around A.
-
-		gl.glRotatef(-angle, 0, 0, 1); // 이동(z축 -10), z축 CW회전
-
-		// Move square B.
-
-		gl.glTranslatef(2, 0, 0); // 이동(z축 -10), z축 CW회전, 이동(x축 2)
-
-		// Scale it to 50% of square A
-
-		gl.glScalef(.5f, .5f, .5f); // 이동(z축 -10), z축 CW회전, 이동(x축 2), 크기(.5)
-
-		// Draw square B.
-
-		figure.draw(gl); // 이동(z축 -10), z축 CW회전, 이동(x축 2), 크기(.5) 적용된 중간 사각형
-
-		// SQUARE C
-
-		// Save the current matrix
-
-		gl.glPushMatrix(); // 이동(z축 -10), z축 CW회전, 이동(x축 2), 크기(.5)변환적용된 행렬 저장
-
-		// Make the rotation around B
-
-		gl.glRotatef(-angle, 0, 0, 1); // B사각형을 중심으로 공전
-
-		gl.glTranslatef(2, 0, 0);
-
-		// Scale it to 50% of square B
-
-		gl.glScalef(.5f, .5f, .5f);
-
-		// Rotate around it's own center.
-
-		gl.glRotatef(angle * 10, 0, 0, 1); // 빠르게 자전
-
-		// Draw square C.
-
-		figure.draw(gl);
-
-		// Restore to the matrix as it was before C.
-
-		gl.glPopMatrix();
-
-		// Restore to the matrix as it was before B.
-
-		gl.glPopMatrix();
-
-		// Increse the angle.
-
-		angle++;
+//		// SQUARE B
+//
+//		// Save the current matrix
+//
+//		gl.glPushMatrix(); // 이동(z축 -10)변환된 행렬 저장
+//
+//		// Rotate square B before moving it, making it rotate around A.
+//
+//		gl.glRotatef(-angle, 0, 0, 1); // 이동(z축 -10), z축 CW회전
+//
+//		// Move square B.
+//
+//		gl.glTranslatef(2, 0, 0); // 이동(z축 -10), z축 CW회전, 이동(x축 2)
+//
+//		// Scale it to 50% of square A
+//
+//		gl.glScalef(.5f, .5f, .5f); // 이동(z축 -10), z축 CW회전, 이동(x축 2), 크기(.5)
+//
+//		// Draw square B.
+//
+//		figure.draw(gl); // 이동(z축 -10), z축 CW회전, 이동(x축 2), 크기(.5) 적용된 중간 사각형
+//
+//		// SQUARE C
+//
+//		// Save the current matrix
+//
+//		gl.glPushMatrix(); // 이동(z축 -10), z축 CW회전, 이동(x축 2), 크기(.5)변환적용된 행렬 저장
+//
+//		// Make the rotation around B
+//
+//		gl.glRotatef(-angle, 0, 0, 1); // B사각형을 중심으로 공전
+//
+//		gl.glTranslatef(2, 0, 0);
+//
+//		// Scale it to 50% of square B
+//
+//		gl.glScalef(.5f, .5f, .5f);
+//
+//		// Rotate around it's own center.
+//
+//		gl.glRotatef(angle * 10, 0, 0, 1); // 빠르게 자전
+//
+//		// Draw square C.
+//
+//		figure.draw(gl);
+//
+//		// Restore to the matrix as it was before C.
+//
+//		gl.glPopMatrix();
+//
+//		// Restore to the matrix as it was before B.
+//
+//		gl.glPopMatrix();
+//
+//		// Increse the angle.
+//
+//		angle++;
 	}
 
 	@Override
