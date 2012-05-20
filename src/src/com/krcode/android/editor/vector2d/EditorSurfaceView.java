@@ -6,6 +6,7 @@ package com.krcode.android.editor.vector2d;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 /**
  * @author rivergod
@@ -31,5 +32,10 @@ public class EditorSurfaceView extends GLSurfaceView {
 		// TODO Auto-generated constructor stub
 		this.setRenderer(new EditorRender());
 	}
-
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		return super.onTouchEvent(event);
+	}
 }
