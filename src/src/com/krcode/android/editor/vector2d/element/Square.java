@@ -1,4 +1,4 @@
-package com.krcode.android.editor.vector2d;
+package com.krcode.android.editor.vector2d.element;
 
 import java.nio.ByteBuffer;
 
@@ -10,7 +10,7 @@ import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Square {
+public class Square implements Figure{
 
 	private float vertices[] = {
 			-1.0f, 1.0f, 0.0f, // 0, Top Left
