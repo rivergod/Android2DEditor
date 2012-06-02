@@ -7,17 +7,20 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
 
 import com.krcode.android.editor.vector2d.element.Figure;
+import com.krcode.android.editor.vector2d.element.Polygon;
 import com.krcode.android.editor.vector2d.element.Quadrangle;
 import com.krcode.android.editor.vector2d.element.Triangle;
 
 public class EditorRender implements Renderer {
 
 	private Figure figure;
+	private Figure figure2;
 	private float angle = 0;
 
 	public EditorRender() {
 		// TODO Auto-generated constructor stub
-		figure = new Triangle();
+		figure = new Polygon();
+		figure2 = new Triangle();
 	}
 
 	@Override
@@ -49,6 +52,7 @@ public class EditorRender implements Renderer {
 		// Draw square A.
 
 		figure.draw(gl); // 이동(z축 -10), z축 회전변환된 큰 사각형
+		figure2.draw(gl);
 
 		// Restore the last matrix.
 

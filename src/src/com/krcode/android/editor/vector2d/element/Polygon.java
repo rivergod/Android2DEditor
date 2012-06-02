@@ -1,5 +1,9 @@
 package com.krcode.android.editor.vector2d.element;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -11,7 +15,7 @@ public class Polygon implements Figure {
 	private ArrayList<FloatVertex> vertexList;
 
 	public Polygon() {
-		n = 7;
+		n = 5;
 		vertexList = new ArrayList<FloatVertex>();
 
 		FloatVertex org = new FloatVertex(0, 1, 0);
@@ -51,10 +55,49 @@ public class Polygon implements Figure {
 		// coordinates to use when rendering.
 
 		gl.glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
-
-		gl.glVertexPointer(3, gl., stride, pointer)
 		
-		gl.glDrawArrays(mode, first, count)
+		float a[] = new float[n*3];
+		
+		for(int i=0; i < n; i++) {
+			FloatVertex fv = vertexList.get(i);
+			
+			a[(3*i)] = fv.getX();
+			a[(3*i)+1] = fv.getY();
+			a[(3*i)+2] = fv.getZ();
+		}
+		
+		ByteBuffer vbb = ByteBuffer.allocateDirect( a.length * 4);
+
+		vbb.order(ByteOrder.nativeOrder());
+		
+		FloatBuffer vertexBuffer = vbb.asFloatBuffer();
+
+		vertexBuffer.put(a);
+
+		vertexBuffer.position(0);
+		
+		short[] indices = { 0, 1, 2, 3, 4, 5, 6 };
+		
+		ByteBuffer ibb = ByteBuffer.allocateDirect(indices.length * 2);
+
+		ibb.order(ByteOrder.nativeOrder());
+
+		ShortBuffer indexBuffer = ibb.asShortBuffer();
+
+		indexBuffer.put(indices);
+
+		indexBuffer.position(0);
+		
+
+		gl.glLineWidth(2.0f);
+		
+		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
+		
+//		gl.glDrawArrays(GL10.GL_LINES, 0, n);
+//		gl.glDrawArrays(GL10.GL_LINE_LOOP, 0, n);
+		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, n);
+//		gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, 7,
+//				GL10.GL_UNSIGNED_SHORT, indexBuffer);
 
 		// Disable the vertices buffer.
 

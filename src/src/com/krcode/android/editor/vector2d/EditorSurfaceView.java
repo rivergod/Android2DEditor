@@ -6,6 +6,7 @@ package com.krcode.android.editor.vector2d;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 /**
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
  *
  */
 public class EditorSurfaceView extends GLSurfaceView {
+	private GestureDetector gestureDetector;
 
 	/**
 	 * @param context
@@ -21,6 +23,7 @@ public class EditorSurfaceView extends GLSurfaceView {
 		super(context);
 		// TODO Auto-generated constructor stub
 		this.setRenderer(new EditorRender());
+		this.gestureDetector = new GestureDetector(context, new EditorOnGestureListener());
 	}
 
 	/**
@@ -35,7 +38,26 @@ public class EditorSurfaceView extends GLSurfaceView {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// TODO Auto-generated method stub
-		return super.onTouchEvent(event);
+		return gestureDetector.onTouchEvent(event);
+	}
+	
+	private class EditorOnGestureListener extends GestureDetector.SimpleOnGestureListener {
+		@Override
+		public boolean onDown(MotionEvent e) {
+			// TODO Auto-generated method stub
+			return super.onDown(e);
+		}
+		
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			// TODO Auto-generated method stub
+			return super.onDoubleTap(e);
+		}
+		
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			// TODO Auto-generated method stub
+			return super.onSingleTapConfirmed(e);
+		}
 	}
 }
