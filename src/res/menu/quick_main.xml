@@ -1,4 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/quick_menu_append"
+        android:title="@string/quick_append"
+        android:orderInCategory="1"></item>
     <!-- 
     <item
           android:id="@+id/quick_menu_goto"
