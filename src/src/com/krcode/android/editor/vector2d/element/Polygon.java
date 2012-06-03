@@ -16,6 +16,7 @@ import min3d.vos.RenderType;
 public class Polygon extends Object3dContainer {
 
 	private int edges;
+	private float defaultSize;
 	private int cols;
 	private int rows;
 
@@ -38,9 +39,14 @@ public class Polygon extends Object3dContainer {
 //	}
 
 	public Polygon(int $edges, Color4 color) {
+		this($edges, 2.0f, color);
+	}
+
+	public Polygon(int $edges, float defaultSize, Color4 color) {
 		super($edges, 0);
 
 		edges = $edges;
+		this.defaultSize = defaultSize;
 		
 		vertexColorsEnabled(true);
 		ignoreFaces(true);
@@ -58,7 +64,7 @@ public class Polygon extends Object3dContainer {
 	private void build() {
 		vertexList = new ArrayList<FloatVertex>();
 
-		FloatVertex org = new FloatVertex(0, 2f, 0);
+		FloatVertex org = new FloatVertex(0, this.defaultSize, 0);
 
 		vertexList.add(org);
 
