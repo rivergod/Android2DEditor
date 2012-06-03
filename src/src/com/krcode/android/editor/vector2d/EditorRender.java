@@ -19,7 +19,7 @@ public class EditorRender implements Renderer {
 
 	public EditorRender() {
 		// TODO Auto-generated constructor stub
-		figure = new Polygon();
+//		figure = new Polygon();
 		figure2 = new Triangle();
 	}
 
@@ -51,7 +51,7 @@ public class EditorRender implements Renderer {
 
 		// Draw square A.
 
-		figure.draw(gl); // 이동(z축 -10), z축 회전변환된 큰 사각형
+//		figure.draw(gl); // 이동(z축 -10), z축 회전변환된 큰 사각형
 		figure2.draw(gl);
 
 		// Restore the last matrix.

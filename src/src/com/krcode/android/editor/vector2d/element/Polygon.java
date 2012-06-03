@@ -8,28 +8,110 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Polygon implements Figure {
+import min3d.Utils;
+import min3d.core.Object3dContainer;
+import min3d.vos.Color4;
 
-	private int n;
+public class Polygon extends Object3dContainer {
+
+	private int edges;
+	private int cols;
+	private int rows;
 
 	private ArrayList<FloatVertex> vertexList;
 
-	public Polygon() {
-		n = 5;
+//	public Polygon(int $edges, int $columns, int $rows, Boolean $useUvs,
+//			Boolean $useNormals, Boolean $useVertexColors, Color4 color) {
+//		super(($columns + 1) * ($rows + 1), $columns * $rows * 2, $useUvs,
+//				$useNormals, $useVertexColors);
+//
+//		edges = $edges;
+//		cols = $columns;
+//		rows = $rows;
+//
+//		if (color != null) {
+//			defaultColor(color);
+//		}
+//
+//		build();
+//	}
+
+	public Polygon(int $edges, Color4 color) {
+		super($edges, 0);
+
+		edges = $edges;
+
+		if (color != null) {
+			defaultColor(color);
+		}
+
+		build();
+	}
+
+	
+	private void build() {
 		vertexList = new ArrayList<FloatVertex>();
 
 		FloatVertex org = new FloatVertex(0, 1, 0);
 
 		vertexList.add(org);
 
-		for (int i = 1; i < n; i++) {
-			FloatVertex iVtx = FloatVertex.rotateZ(org, 360 / n * i);
+		for (int i = 1; i < edges; i++) {
+			FloatVertex iVtx = FloatVertex.rotateZ(org, 360 / edges * i);
 
 			vertexList.add(iVtx);
 		}
+		
+		Color4 color = defaultColor();
+
+		for(FloatVertex fv : vertexList){
+			this.vertices().addVertex(fv.getX(), fv.getY(), fv.getZ(), 0, 0, 0, 0, 0, color.r, color.g,
+					color.b, color.a);
+		}
+		
+		
+		
+		
+//		int row, col;
+//
+//		float w = $width / $segsW;
+//		float h = $height / $segsH;
+//
+//		float width5 = $width/2f;
+//		float height5 = $height/2f;
+//		
+//		// Add vertices
+//		
+//		for (row = 0; row <= $segsH; row++)
+//		{
+//			for (col = 0; col <= $segsW; col++)
+//			{
+//				this.vertices().addVertex(
+//					(float)col*w - width5, (float)row*h - height5,0f,	
+//					(float)col/(float)$segsW, 1 - (float)row/(float)$segsH,	
+//					0,0,1f,	
+//					color.r, color.g, color.b, color.a
+//				);
+//			}
+//		}
+//		
+//		// Add faces
+//		
+//		int colspan = $segsW + 1;
+//		
+//		for (row = 1; row <= $segsH; row++)
+//		{
+//			for (col = 1; col <= $segsW; col++)
+//			{
+//				int lr = row * colspan + col;
+//				int ll = lr - 1;
+//				int ur = lr - colspan;
+//				int ul = ur - 1;
+//				Utils.addQuad(this, ul,ur,lr,ll);
+//			}
+//		}
 	}
 
-	@Override
 	public void draw(GL10 gl) {
 
 		// Counter-clockwise winding.
@@ -55,29 +137,29 @@ public class Polygon implements Figure {
 		// coordinates to use when rendering.
 
 		gl.glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
-		
-		float a[] = new float[n*3];
-		
-		for(int i=0; i < n; i++) {
+
+		float a[] = new float[edges * 3];
+
+		for (int i = 0; i < edges; i++) {
 			FloatVertex fv = vertexList.get(i);
-			
-			a[(3*i)] = fv.getX();
-			a[(3*i)+1] = fv.getY();
-			a[(3*i)+2] = fv.getZ();
+
+			a[(3 * i)] = fv.getX();
+			a[(3 * i) + 1] = fv.getY();
+			a[(3 * i) + 2] = fv.getZ();
 		}
-		
-		ByteBuffer vbb = ByteBuffer.allocateDirect( a.length * 4);
+
+		ByteBuffer vbb = ByteBuffer.allocateDirect(a.length * 4);
 
 		vbb.order(ByteOrder.nativeOrder());
-		
+
 		FloatBuffer vertexBuffer = vbb.asFloatBuffer();
 
 		vertexBuffer.put(a);
 
 		vertexBuffer.position(0);
-		
+
 		short[] indices = { 0, 1, 2, 3, 4, 5, 6 };
-		
+
 		ByteBuffer ibb = ByteBuffer.allocateDirect(indices.length * 2);
 
 		ibb.order(ByteOrder.nativeOrder());
@@ -87,17 +169,16 @@ public class Polygon implements Figure {
 		indexBuffer.put(indices);
 
 		indexBuffer.position(0);
-		
 
 		gl.glLineWidth(2.0f);
-		
+
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
-		
-//		gl.glDrawArrays(GL10.GL_LINES, 0, n);
-//		gl.glDrawArrays(GL10.GL_LINE_LOOP, 0, n);
-		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, n);
-//		gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, 7,
-//				GL10.GL_UNSIGNED_SHORT, indexBuffer);
+
+		// gl.glDrawArrays(GL10.GL_LINES, 0, n);
+		// gl.glDrawArrays(GL10.GL_LINE_LOOP, 0, n);
+		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, edges);
+		// gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, 7,
+		// GL10.GL_UNSIGNED_SHORT, indexBuffer);
 
 		// Disable the vertices buffer.
 
