@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 
 /**
  * @author rivergod
+ * @deprecated
  *
  */
 public class EditorSurfaceView extends GLSurfaceView {

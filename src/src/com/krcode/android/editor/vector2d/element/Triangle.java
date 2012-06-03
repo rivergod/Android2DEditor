@@ -7,6 +7,10 @@ import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
+/**
+ * @author rivergod
+ * @deprecated
+ */
 public class Triangle implements Figure {
 	private float vertices[] = { 0.0f, 1.0f, 0.0f, // 0, Top Left
 			-0.8660f, -0.5f, 0.0f, // 1, Bottom Left

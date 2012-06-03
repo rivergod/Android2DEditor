@@ -58,7 +58,7 @@ public class Polygon extends Object3dContainer {
 	private void build() {
 		vertexList = new ArrayList<FloatVertex>();
 
-		FloatVertex org = new FloatVertex(0, 5f, 0);
+		FloatVertex org = new FloatVertex(0, 2f, 0);
 
 		vertexList.add(org);
 
@@ -70,15 +70,15 @@ public class Polygon extends Object3dContainer {
 		
 		Color4 color = defaultColor();
 
-//		for(FloatVertex fv : vertexList){
-//			this.vertices().addVertex(fv.getX(), fv.getY(), fv.getZ(), 0, 1, 0, 0, 1.0f, color.r, color.g,
-//					color.b, color.a);
-//		}
+		for(FloatVertex fv : vertexList){
+			this.vertices().addVertex(fv.getX(), fv.getY(), fv.getZ(), 0, 1, 0, 0, 1.0f, color.r, color.g,
+					color.b, color.a);
+		}
 		
-		this.vertices().addVertex(0.0f, 1.0f, 0.0f, 0.5f, 0.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
-		this.vertices().addVertex(-1.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
-		this.vertices().addVertex(0.0f, -1.0f, 0.0f, 0.5f, 1.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
-		this.vertices().addVertex(1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
+//		this.vertices().addVertex(0.0f, 1.0f, 0.0f, 0.5f, 0.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
+//		this.vertices().addVertex(-1.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
+//		this.vertices().addVertex(0.0f, -1.0f, 0.0f, 0.5f, 1.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
+//		this.vertices().addVertex(1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
 		
 //		int row, col;
 //

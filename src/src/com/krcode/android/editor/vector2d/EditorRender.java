@@ -11,6 +11,11 @@ import com.krcode.android.editor.vector2d.element.Polygon;
 import com.krcode.android.editor.vector2d.element.Quadrangle;
 import com.krcode.android.editor.vector2d.element.Triangle;
 
+/**
+ * @author rivergod
+ * @deprecated
+ *
+ */
 public class EditorRender implements Renderer {
 
 	private Figure figure;
