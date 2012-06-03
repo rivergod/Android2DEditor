@@ -1,5 +1,6 @@
 package min3d.objectPrimitives;
 
+import android.util.Log;
 import min3d.Utils;
 import min3d.core.Object3dContainer;
 import min3d.vos.Color4;
@@ -35,6 +36,8 @@ public class Rectangle extends Object3dContainer
 					0,0,1f,	
 					color.r, color.g, color.b, color.a
 				);
+				Log.d("Rectangle", ((float)col*w - width5) + ", " + ((float)row*h - height5)  + ", " +  0f  + ", " + 	
+					((float)col/(float)$segsW)  + ", " +  (1 - (float)row/(float)$segsH));
 			}
 		}
 		

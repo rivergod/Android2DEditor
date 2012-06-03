@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import min3d.Shared;
+import min3d.Utils;
 import min3d.core.Object3dContainer;
 import min3d.core.RendererActivity;
 import min3d.interfaces.ISceneController;
@@ -13,6 +15,7 @@ import min3d.objectPrimitives.Sphere;
 import min3d.vos.Color4;
 import min3d.vos.RenderType;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,25 +45,23 @@ public class MainActivity extends RendererActivity implements ISceneController {
 		super.initScene();
 		
 		scene.camera().position.setAll(0,0,-10f);
+		scene.camera().target.setAll(0.0f, 0.0f, 0.0f);
+		scene.camera().upAxis.setAll(0.0f, 1.0f, 0.0f);
 		scene.backgroundColor().setAll(new Color4(255, 255, 255, 255));
 		
 		// noLights
 
 		// objects
-//		Object3dContainer sphere;
-//		
-//		sphere = new Sphere(3, 10, 10, true, true, true);
-//		sphere.normalsEnabled(false);
-//		scene.addChild(sphere);
+		Object3dContainer sphere;
+		
+		sphere = new Sphere(3, 10, 10, new Color4(0, 255, 0, 255));
+		sphere.normalsEnabled(false);
+		scene.addChild(sphere);
 		
 		Object3dContainer polygon;
 		
 //		polygon = new Polygon(4, 1, 1, false, false, true, new Color4(1.0f, 0.0f, 0.0f, 1.0f));
 		polygon = new Polygon(4, new Color4(255, 0, 0, 255));
-		polygon.vertexColorsEnabled(false);
-		polygon.ignoreFaces(true);
-		polygon.renderType(RenderType.TRIANGLE_FAN);
-		polygon.normalsEnabled(false);
 		scene.addChild(polygon);
 	
 //		Object3dContainer rectangle;
@@ -95,9 +96,15 @@ public class MainActivity extends RendererActivity implements ISceneController {
 		case R.id.quick_menu_append:
 			Object3dContainer sphere;
 			
-			sphere = new Sphere(3, 10, 10, true, true, true);
-			sphere.normalsEnabled(false);
-			scene.addChild(sphere);
+			sphere = new Sphere(0.8f, 15, 10, true,true,false);;
+			scene.addChildAt(sphere, 0);
+			
+			Bitmap b = Utils.makeBitmapFromResourceId(this, R.drawable.jupiter);
+			Shared.textureManager().addTextureId(b, "jupiter", false);
+			b.recycle();
+			
+			sphere.textures().addById("jupiter");
+			
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

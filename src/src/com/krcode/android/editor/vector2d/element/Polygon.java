@@ -11,6 +11,7 @@ import javax.microedition.khronos.opengles.GL10;
 import min3d.Utils;
 import min3d.core.Object3dContainer;
 import min3d.vos.Color4;
+import min3d.vos.RenderType;
 
 public class Polygon extends Object3dContainer {
 
@@ -40,6 +41,11 @@ public class Polygon extends Object3dContainer {
 		super($edges, 0);
 
 		edges = $edges;
+		
+		vertexColorsEnabled(true);
+		ignoreFaces(true);
+		renderType(RenderType.TRIANGLE_FAN);
+		normalsEnabled(false);
 
 		if (color != null) {
 			defaultColor(color);
@@ -52,25 +58,27 @@ public class Polygon extends Object3dContainer {
 	private void build() {
 		vertexList = new ArrayList<FloatVertex>();
 
-		FloatVertex org = new FloatVertex(0, 1, 0);
+		FloatVertex org = new FloatVertex(0, 5f, 0);
 
 		vertexList.add(org);
 
 		for (int i = 1; i < edges; i++) {
-			FloatVertex iVtx = FloatVertex.rotateZ(org, 360 / edges * i);
+			FloatVertex iVtx = FloatVertex.rotateZ(org, 360f / edges * i);
 
 			vertexList.add(iVtx);
 		}
 		
 		Color4 color = defaultColor();
 
-		for(FloatVertex fv : vertexList){
-			this.vertices().addVertex(fv.getX(), fv.getY(), fv.getZ(), 0, 0, 0, 0, 0, color.r, color.g,
-					color.b, color.a);
-		}
+//		for(FloatVertex fv : vertexList){
+//			this.vertices().addVertex(fv.getX(), fv.getY(), fv.getZ(), 0, 1, 0, 0, 1.0f, color.r, color.g,
+//					color.b, color.a);
+//		}
 		
-		
-		
+		this.vertices().addVertex(0.0f, 1.0f, 0.0f, 0.5f, 0.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
+		this.vertices().addVertex(-1.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
+		this.vertices().addVertex(0.0f, -1.0f, 0.0f, 0.5f, 1.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
+		this.vertices().addVertex(1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
 		
 //		int row, col;
 //
