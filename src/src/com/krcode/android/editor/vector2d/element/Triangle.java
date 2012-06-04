@@ -10,6 +10,10 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * @author rivergod
  * @deprecated
+ * 
+ * 삼각형 개체
+ * 
+ * min3d사용으로 더이상 사용하지 않음<br/>
  */
 public class Triangle implements Figure {
 	private float vertices[] = { 0.0f, 1.0f, 0.0f, // 0, Top Left

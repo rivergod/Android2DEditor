@@ -12,7 +12,8 @@ import android.view.MotionEvent;
 /**
  * @author rivergod
  * @deprecated
- *
+ * 
+ * min3d사용으로 더이상 사용하지 않음 <br/>
  */
 public class EditorSurfaceView extends GLSurfaceView {
 	private GestureDetector gestureDetector;

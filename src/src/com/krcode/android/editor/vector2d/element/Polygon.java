@@ -13,35 +13,45 @@ import min3d.core.Object3dContainer;
 import min3d.vos.Color4;
 import min3d.vos.RenderType;
 
+/**
+ * @author rivergod
+ * 
+ * 다각형을 처리하기 위한 객체<br/>
+ */
 public class Polygon extends Object3dContainer {
 
+	/**
+	 * edge의 갯수
+	 */
 	private int edges;
+		
+	/**
+	 * 기본크기 
+	 */
 	private float defaultSize;
+
 	private int cols;
 	private int rows;
 
 	private ArrayList<FloatVertex> vertexList;
 
-//	public Polygon(int $edges, int $columns, int $rows, Boolean $useUvs,
-//			Boolean $useNormals, Boolean $useVertexColors, Color4 color) {
-//		super(($columns + 1) * ($rows + 1), $columns * $rows * 2, $useUvs,
-//				$useNormals, $useVertexColors);
-//
-//		edges = $edges;
-//		cols = $columns;
-//		rows = $rows;
-//
-//		if (color != null) {
-//			defaultColor(color);
-//		}
-//
-//		build();
-//	}
-
+	/**
+	 * @param $edges edge의 갯수
+	 * @param color 색상
+	 * 
+	 * edge의 갯수와 기본 색상으로만 객체를 선언하는 생성자 <br/>
+	 */
 	public Polygon(int $edges, Color4 color) {
 		this($edges, 2.0f, color);
 	}
 
+	/**
+	 * @param $edges edge의 갯수
+	 * @param defaultSize 기본 크기
+	 * @param color 색상
+	 * 
+	 * edge의 갯수, 크기, 기본 색상으로만 객체를 선언하는 생성자 <br/>
+	 */
 	public Polygon(int $edges, float defaultSize, Color4 color) {
 		super($edges, 0);
 
@@ -61,13 +71,19 @@ public class Polygon extends Object3dContainer {
 	}
 
 	
+	/**
+	 * opengl에 객체를 생성하기 위한 연산 루틴
+	 */
 	private void build() {
+		// 꼭지점의 목록
 		vertexList = new ArrayList<FloatVertex>();
 
+		// 기준 꼭지점
 		FloatVertex org = new FloatVertex(0, this.defaultSize, 0);
 
 		vertexList.add(org);
 
+		// 정 n각형 생성을 위하여 계산된 각도를 회전하여 연산
 		for (int i = 1; i < edges; i++) {
 			FloatVertex iVtx = FloatVertex.rotateZ(org, 360f / edges * i);
 
@@ -76,56 +92,20 @@ public class Polygon extends Object3dContainer {
 		
 		Color4 color = defaultColor();
 
+		// 화면에 출력하기 위한 vertex를 생성하여 min3d의 render에 넘김
 		for(FloatVertex fv : vertexList){
 			this.vertices().addVertex(fv.getX(), fv.getY(), fv.getZ(), 0, 1, 0, 0, 1.0f, color.r, color.g,
 					color.b, color.a);
 		}
 		
-//		this.vertices().addVertex(0.0f, 1.0f, 0.0f, 0.5f, 0.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
-//		this.vertices().addVertex(-1.0f, 0.0f, 0.0f, 0.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
-//		this.vertices().addVertex(0.0f, -1.0f, 0.0f, 0.5f, 1.0f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
-//		this.vertices().addVertex(1.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0, 0, 1.0f, color.r, color.g, color.b, color.a);
-		
-//		int row, col;
-//
-//		float w = $width / $segsW;
-//		float h = $height / $segsH;
-//
-//		float width5 = $width/2f;
-//		float height5 = $height/2f;
-//		
-//		// Add vertices
-//		
-//		for (row = 0; row <= $segsH; row++)
-//		{
-//			for (col = 0; col <= $segsW; col++)
-//			{
-//				this.vertices().addVertex(
-//					(float)col*w - width5, (float)row*h - height5,0f,	
-//					(float)col/(float)$segsW, 1 - (float)row/(float)$segsH,	
-//					0,0,1f,	
-//					color.r, color.g, color.b, color.a
-//				);
-//			}
-//		}
-//		
-//		// Add faces
-//		
-//		int colspan = $segsW + 1;
-//		
-//		for (row = 1; row <= $segsH; row++)
-//		{
-//			for (col = 1; col <= $segsW; col++)
-//			{
-//				int lr = row * colspan + col;
-//				int ll = lr - 1;
-//				int ur = lr - colspan;
-//				int ul = ur - 1;
-//				Utils.addQuad(this, ul,ur,lr,ll);
-//			}
-//		}
 	}
 
+	/**
+	 * @param gl
+	 * @deprecated
+	 * 
+	 * min3d사용으로 더이상 사용하지 않음
+	 */
 	public void draw(GL10 gl) {
 
 		// Counter-clockwise winding.

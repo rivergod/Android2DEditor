@@ -1,4 +1,4 @@
-package com.krcode.android.editor.vector2d.element;
+package com.krcode.android.editor.vector2d;
 
 import java.nio.ByteBuffer;
 
@@ -14,13 +14,12 @@ import javax.microedition.khronos.opengles.GL10;
  * @author rivergod
  * @deprecated
  * 
- * 사각형 객체<br/>
- * <br/>
- * min3d사용으로 더이상 사용하지 않음<br/>
+ * opengl 테스트 클래스 <br/>
  */
-public class Quadrangle implements Figure {
+public class Square {
 
-	private float vertices[] = { -1.0f, 1.0f, 0.0f, // 0, Top Left
+	private float vertices[] = {
+			-1.0f, 1.0f, 0.0f, // 0, Top Left
 			-1.0f, -1.0f, 0.0f, // 1, Bottom Left
 			1.0f, -1.0f, 0.0f, // 2, Bottom Right
 			1.0f, 1.0f, 0.0f, // 3, Top Right
@@ -38,7 +37,7 @@ public class Quadrangle implements Figure {
 
 	private ShortBuffer indexBuffer;
 
-	public Quadrangle() {
+	public Square() {
 
 		// a float is 4 bytes, therefore we multiply the number if
 
@@ -93,13 +92,12 @@ public class Quadrangle implements Figure {
 		// Specifies the location and data format of an array of vertex
 
 		// coordinates to use when rendering.
-
+		
 		gl.glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
 
 		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
 
-		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length,
-				GL10.GL_UNSIGNED_SHORT, indexBuffer);
+		gl.glDrawElements(GL10.GL_TRIANGLES, indices.length, GL10.GL_UNSIGNED_SHORT, indexBuffer);
 
 		// Disable the vertices buffer.
 

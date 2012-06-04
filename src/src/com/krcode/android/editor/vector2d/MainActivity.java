@@ -23,7 +23,8 @@ import com.krcode.android.editor.vector2d.element.Polygon;
 
 /**
  * @author rivergod
- *
+ * 
+ * Android2DEditor의 메인 <br/>
  */
 public class MainActivity extends RendererActivity implements ISceneController {
 	private GestureDetector gestureDetector;
@@ -130,6 +131,10 @@ public class MainActivity extends RendererActivity implements ISceneController {
 		return gestureDetector.onTouchEvent(event);
 	}
 	
+	/**
+	 * @author rivergod
+	 * Android2DEditor이 메인에서 각종 제스처 (터치 등등)을 처리학 위한 리스너 객체 
+	 */
 	private class EditorOnGestureListener extends GestureDetector.SimpleOnGestureListener {
 		@Override
 		public boolean onDown(MotionEvent e) {
